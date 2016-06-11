@@ -46,7 +46,7 @@ namespace Dux.Web
         {
             services.AddDbContext<DuxContext>(options =>
                                         //options.UseSqlServer(@"Data Source=(localdb)\v11.0;Initial Catalog=DuxWeb;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False", 
-                                        options.UseSqlServer(@"Data Source=dux.clk44wtj7jgj.sa-east-1.rds.amazonaws.com,1433;Initial Catalog=Dux;Integrated Security=False;User Id=dux;Password=wtf99541;Connect Timeout=15;MultipleActiveResultSets=True", 
+                                        options.UseSqlServer(@"Data Source=dux.clk44wtj7jgj.sa-east-1.rds.amazonaws.com,1433;Initial Catalog=Dux;User Id=dux;Password=wtf99541;Connect Timeout=15;MultipleActiveResultSets=True", 
                                         b => b.MigrationsAssembly("Dux.Web"))
                             );
 
