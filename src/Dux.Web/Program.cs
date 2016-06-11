@@ -11,7 +11,7 @@ namespace Dux.Web
             var host = new WebHostBuilder()
               .UseKestrel()
               .UseContentRoot(Directory.GetCurrentDirectory()) 
-              .UseUrls("http://localhost:8080")
+              .UseUrls("http://0.0.0.0:5000")
               .UseStartup<Startup>()
               .Build();
 
