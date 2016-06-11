@@ -87,7 +87,7 @@ namespace Dux.Web
             services.AddScoped<IAcessoService, AcessoService>();
             services.AddScoped<IDistribuicaoService, DistribuicaoService>();
             services.AddScoped<INomeListaService, NomeListaService>();
-            services.AddSingleton<Seed, Seed>();
+            services.AddTransient<Seed, Seed>();
 
 
             services.AddCors(options =>
@@ -178,9 +178,9 @@ namespace Dux.Web
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            IApplicationBuilder app, ILoggerFactory loggerFactory, Seed seed)
+            IApplicationBuilder app, ILoggerFactory loggerFactory)//, Seed seed)
         {            
-            seed.EnsureSeedData();
+            //seed.EnsureSeedData();
             //app.UseDeveloperExceptionPage();
             app.UseExceptionHandler(appBuilder =>
             {
