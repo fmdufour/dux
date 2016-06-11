@@ -1,0 +1,66 @@
+﻿@{    
+    Layout = null;
+}
+<div class="content-heading">
+    <div class="row">
+        <div class="col-xs-10">
+            <p>Perfil de Listas</p>
+        </div>
+        <div class="col-xs-2">
+            <button class="btn btn-default" ui-sref="app.perfislistacriar">
+                <i class="fa fa-plus"></i> Adicionar Perfil Listas
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">            
+            <div class="panel-body">
+                <div ng-if="vm.perfis.length > 0" class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width:40%">Perfil</th>
+                                <th class="text-center" style="width:30%">Editar</th>
+                                <th class="text-center" style="width:30%">Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="perfil in vm.perfis">
+                                <td class="text-center">{{ perfil.nomePerfil }}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-default" ui-sref="app.perfislistacriar({id:{{perfil.id}}})">
+                                        <i class="fa fa-2x fa-pencil"></i>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-default" ng-click="vm.excluiPerfil(perfil)">
+                                        <i class="fa fa-2x fa-desktop"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cadastro-vazio" ng-if="vm.perfis.length == 0">
+                    <span class="cara-triste">):</span>
+                    <span class="texto-vazio">Ainda não existem Perfis de Listas cadastrados</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="excluirPerfil">
+
+    <div class="dialog-contents">
+        <p>
+            Você tem certeza que quer excluir esse Perfil?
+        </p>
+        <button class="btn btn-danger" ng-click="confirm()">Sim</button>
+        <button class="btn btn-default" ng-click="closeThisDialog()">Cancelar</button>
+    </div>
+</script>

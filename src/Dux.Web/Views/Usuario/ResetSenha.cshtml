@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en" data-ng-app="externalPagesModule">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="app, responsive, angular, bootstrap, dashboard, admin">
+    <title>Sistema Dux - Resetar Senha</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/app.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div ng-controller="resetSenhaController as vm" class="block-center mt-xl wd-xl">
+        <div class="panel panel-dark panel-flat">
+            <div class="panel-body">
+                <div class="bg-danger-light validationErrors" ng-show="vm.validationErrors && vm.validationErrors.length > 0">
+                    <ul>
+                        <li ng-repeat="error in vm.validationErrors">{{error}}</li>
+                    </ul>
+                </div>
+                <div ng-switch on="vm.resetado">
+                    <div ng-switch-when="false">
+                        <div class="text-center margin-bot-10">
+                            <b>Configuração de Nova Senha</b>
+                        </div>
+                        <form role="form" novalidate="" name="reset" class="form-validate mb-lg">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input id="email" type="email" name="email" ng-model="vm.reset.email" placeholder="Email" autocomplete="off" ng-required="true" class="form-control" />
+                                <span ng-show="reset.email.$dirty && reset.email.$error.required" class="text-danger">Informe seu email</span>
+                                <span ng-show="reset.email.$dirty && reset.email.$error.email" class="text-danger">Informe um email válido</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Digite a nova senha</label>
+                                <input type="password" ng-model="vm.reset.senha"
+                                       class="form-control" placeholder="Nova Senha"
+                                       ng-required="true"
+                                       name="senha"
+                                       ng-minlength="6" />
+                                <span ng-show="reset.senha.$dirty && reset.senha.$error.minlength" class="text-danger">
+                                    Sua senha deve ter no mínimo 6 caracteres
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirme a senha</label>
+                                <input type="password" 
+                                       ng-model="vm.reset.confirmacaoSenha"
+                                        class="form-control" 
+                                       ng-required="true"
+                                       placeholder="Confirmação da senha" />
+                            </div>
+                            <input type="text" ng-init="vm.reset.code = '@Html.Raw(ViewBag.Code)'" ng-model="vm.reset.code" hidden />
+
+                            <button type="submit"
+                                    ng-disabled="reset.$invalid"
+                                    class="btn btn-block btn-primary"
+                                    ng-click="vm.reseta()">
+                                Resetar Senha
+                            </button>
+                        </form>
+                    </div>
+                    <div ng-switch-when="true">
+                        <p>Senha alterada com sucesso!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/externalpages/vendor/angular.min.js"></script>
+    <script src="~/externalpages/vendor/angular-local-storage.min.js"></script>
+    <script src="~/externalpages/externalpagesmodule.js"></script>
+    <script src="~/externalpages/login/loginservice.js"></script>
+    <script src="~/externalpages/senha/resetsenhacontroller.js"></script>
+
+</body>
+</html>

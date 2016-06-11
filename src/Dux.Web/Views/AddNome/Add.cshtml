@@ -1,0 +1,147 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+
+                <div class="row">
+                    <div class="col-sm-offset-1 col-sm-5 col-xs-12 text-center margin-bot-10">
+                        <button class="btn btn-info btn-block" ng-click="vm.mostrarInstrucoes()">
+                            Como preencher <i class="fa fa-question"></i>
+                        </button>
+                    </div>
+                    <div class="col-sm-5 col-xs-12 text-center margin-bot-10">
+                        <button class="btn btn-primary btn-block" ng-click="vm.addNomes()">
+                            Enviar Nomes <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-offset-1 col-sm-5 col-xs-12 text-center margin-bot-10">
+                        <button class="btn btn-info btn-block" ng-click="vm.mostrarInfoLista()">
+                            Ver info. Lista <i class="fa fa-info"></i>
+                        </button>
+                    </div>
+                    <div class="col-sm-5 col-xs-12 text-center margin-bot-10">
+                        <button class="btn btn-primary btn-block btn-danger" ng-click="vm.mostrarErros()">
+                            Exibir Erros <i class="fa fa-warning"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div ng-show="vm.exibirErros" class="text-center">
+
+                    <div ng-show="vm.erros && vm.erros.length > 0">
+                        <label class="text-danger">Erros de validação</label>
+                        <div class="addnome-regras">
+                            <p ng-repeat="erro in vm.erros" class="bg-danger-light">
+                                {{erro}}
+                            </p>
+                        </div>
+                    </div>
+                    <div ng-show="!vm.erros || vm.erros.length == 0">
+                        <p class="text-success">Não foram encontrados erros de validação nos nomes adicionados</p>
+                    </div>
+                </div>
+
+                <ul>
+                        <li ng-repeat="nome in vm.nomes">
+                            <span ng-if="nome.masculino">Masculino</span>
+                            <span ng-if="!nome.masculino">Feminino</span>
+                            <p>{{nome.nome}}</p>
+                            <p>{{nome.numCelular}}</p>
+                            <p>{{nome.numRg}}</p>
+                        </li>
+                    </ul>
+
+
+
+                <div ng-show="vm.infoLista" class="info-lista">
+                    <p class="nome-lista">{{vm.lista.nomeLista}}</p>
+
+                    <div class="entrada">
+                        <div class="row">
+                            <div class="col-xs-6 box-lista-m">
+                                <b class="lista-m">Lista Masc.</b>
+                                <div ng-if="vm.lista.listaM" class="margin-top-10">                                    
+                                    <p class="preco-m"><i class="fa fa-male"></i>{{vm.lista.precoM | currency}}</p>
+                                    <p class="consuma-m"><i class="fa fa-glass"></i>{{vm.lista.valorConsumaM | currency}}</p>
+                                </div>
+                                <div ng-if="!vm.lista.listaM" class="margin-top-10">
+                                    <i class="fa fa-2x fa-thumbs-down"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <b class="lista-m margin-bot-10" >Lista Fem.</b>
+                                <div ng-if="vm.lista.listaF" class="margin-top-10">                                    
+                                    <p class="preco-f"><i class="fa fa-female"></i>{{vm.lista.precoF | currency}}</p>
+                                    <p class="consuma-f"><i class="fa fa-glass"></i>{{vm.lista.valorConsumaF | currency}}</p>
+                                </div>
+                                <div ng-if="!vm.lista.listaF" class="margin-top-10">
+                                    <i class="fa fa-2x fa-thumbs-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div ng-show="vm.instrucoes" class="padrao-preench">
+                    <p class="instrucao">Deve ser informado um convidado por linha no seguinte formato:</p>
+                    <span class="genero">Gênero (M ou F)</span>
+                    <span class="nome">Nome</span>
+                    <span class="celular">Nº Celular com DDD <span class="opcional" ng-if="!vm.lista.exigirCelular">(Opcional)</span></span>
+                    <span class="rg" ng-if="vm.lista.exigirRg">Nº R.G.</span>
+                </div>
+
+                <div class="text-center">
+                    <div class="nomes-disponiveis">
+                        <div class="erros-nomes">
+                            <span class="text-danger">{{vm.erros.length}}</span><i class="fa text-danger fa-warning"></i>
+                        </div>
+                        <div ng-if="vm.lista.listaM" class="nomes-masc">
+                            <span>{{vm.nomesM}}/{{vm.dist.qtdNomesM}}</span><i class="fa fa-male"></i>
+                        </div>
+                        <div ng-if="vm.lista.listaF" class="nomes-fem">
+                            {{vm.nomesF}}/{{vm.dist.qtdNomesF}}<i class="fa fa-female"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <label>Lista de Convidados</label>
+
+                <div class="form-group">
+                    <textarea class="form-control"
+                              cols="40"
+                              ng-change="vm.change()"
+                              style="resize:vertical; min-height:300px; white-space: nowrap; border-left-width: 4px; border-style: ridge;"
+                              ng-model="vm.blocoNomes" />
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/ng-template" id="erros">
+
+    <div class="dialog-contents">
+        <ul>
+            <li ng-repeat="erro in errosServer">
+                {{erro}}
+            </li>
+        </ul>
+        <button class="btn btn-default" ng-click="closeThisDialog()">Ok</button>
+    </div>
+</script>

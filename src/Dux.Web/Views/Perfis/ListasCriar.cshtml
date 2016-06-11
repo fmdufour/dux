@@ -1,0 +1,574 @@
+﻿@{
+    Layout = null;
+}
+<div class="content-heading">
+    <p ng-if="editar">Edição de Perfil de Listas</p>
+    <p ng-if="!editar">Criar Perfil de Listas</p>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <form name="formPerfil" novalidate>
+                        <div class="bg-danger-light validationErrors" ng-show="vm.validationErrors && vm.validationErrors.length > 0">
+                            <ul>
+                                <li ng-repeat="error in vm.validationErrors">{{error}}</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 margin-bot-10">
+                            <label for="vm.perfil.nomePerfil">Nome do Perfil</label>
+                            <div class="input-group margin-bot-10">
+                                <span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+                                <input class="form-control" 
+                                       name="nomePerfil"
+                                       placeholder="Nome do Perfil"
+                                        type="text" 
+                                       ng-model="vm.perfil.nomePerfil" 
+                                       ng-required="true"/>
+                            </div>                            
+                            <p ng-show="formPerfil.nomePerfil.$error.required && formPerfil.nomePerfil.$dirty" class="aviso-erro">
+                                Digite o nome do Perfil
+                            </p>
+                            <label for="vm.perfil.observacao">Observação</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-comment-o fa-fw"></i></span>
+                                <textarea placeholder="Observação" 
+                                          class="form-control" 
+                                          type="text" 
+                                          ng-model="vm.perfil.observacoes"
+                                          />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+
+                            <button ng-click="vm.openAddLista()" 
+                                    style="margin-top: 26px;"
+                                    class="btn btn-primary btn-block margin-bot-10">
+                                <b><i class="fa fa-plus"></i></b>
+                                Adicionar Lista
+                            </button>
+
+                            <div ng-if="vm.perfil.layoutListas.length > 0">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:70%">Lista</th>
+                                            <th style="width:15%">Editar</th>
+                                            <th style="width:15%">Remover</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="lista in vm.perfil.layoutListas">
+                                        <td>{{lista.nomeLista}}</td>
+                                        <td class="text-center">
+                                            <button ng-click="vm.openEditaLista(lista)" class="btn btn-primary">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        </td>
+                                        <td class="text-center">
+                                            <button ng-click="vm.removeLista($index)" class="btn btn-danger">
+                                                <i class="fa fa-remove"></i>
+                                            </button>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="cadastro-vazio" ng-if="vm.perfil.layoutListas.length == 0">
+                                <span class="cara-triste">):</span>
+                                <span class="texto-vazio">Ainda não existem Listas cadastradas para esse Perfil</span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 text-center">
+                            <div ng-if="!editar" >
+                                <button ng-disabled="formPerfil.$invalid"
+                                        class="btn btn-success"
+                                        ng-click="vm.salvaPerfil(vm.perfil)">
+                                    Criar Perfil de Lista<i class="fa fa-check"></i>
+                                </button>
+                            </div>
+                            <div ng-if="editar">
+                                <button ng-disabled="formPerfil.$invalid"
+                                        class="btn btn-primary"
+                                        ng-click="vm.salvaPerfil(vm.perfil)">
+                                    Editar Perfil de Lista<i class="fa fa-pencil"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="addLista">
+
+    <ul class="nav nav-tabs">
+        <li ng-repeat="step in steps" ng-class="{active: $index==getCurrentStepIndex()}">
+            <a href="javascript:void(0)" ng-click="goToStep($index)">{{step}}</a>
+        </li>
+    </ul>
+    <div class="container-dialog">
+        <form name="form" class="form-lista" novalidate>
+
+            <div ng-switch on="selection">
+                <div ng-switch-when="1: Lista">
+                    <div class="form-group">
+                        <label>Nome da Lista:</label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-info"></i></span>
+                            <input class="form-control"
+                                   name="nomeLista"
+                                   ng-model="lista.nomeLista"
+                                   ng-required="true" />
+                        </div>
+                        <p ng-show="form.nomeLista.$error.required && form.nomeLista.$dirty" class="aviso-erro">
+                            Digite o nome da lista
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox c-checkbox">
+                            <label>
+                                <input ng-model="lista.exigirCelular" type="checkbox" />
+                                <span class="fa fa-check"></span> Exigir número de celular
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox c-checkbox">
+                            <label>
+                                <input ng-model="lista.exigirRg" type="checkbox" />
+                                <span class="fa fa-check"></span> Exigir número do RG
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div uib-dropdown>
+                            <label>Perfil de Distribuição</label>
+                            <div class="input-group">
+                                <input name="perfilDist" class="form-control" placeholder="Nenhum Perfil Selecionado"
+                                       ng-model="perfilSelecionado" style="margin-bottom:0" readonly />
+
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" uib-dropdown-toggle>
+                                        <span class="caret">
+                                        </span>
+                                    </button>
+                                </span>
+                            </div>
+
+                            <ul uib-dropdown-menu class="dropdown-pesquisa">
+                                <li ng-click="limpaPerfil()">  <a> <i class="fa fa-remove"></i> Limpar Escolha </a></li>
+                                <li ng-repeat="a in perfisDist">
+                                    <a ng-click="selecionaPerfil(a)">
+                                        {{a.nomePerfil}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="botao-dialog">
+                        <button class="btn btn-primary btn-block" ng-click="incrementStep()">Próximo Passo <i class="fa fa-arrow-circle-right"></i></button>
+                    </div>
+
+                </div>
+
+                <div ng-switch-when="2: Entrada">
+
+                    <div class="form-group">
+                        <div class="checkbox c-checkbox">
+                            <label>
+                                <input ng-model="lista.listaM" type="checkbox" />
+                                <span class="fa fa-check"></span><b>Permitir Nomes Masculinos</b>
+                            </label>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><b>R</b><i class="fa fa-dollar"></i></span>
+
+                            <input name="precoM"
+                                   ng-pattern="/^[0-9]+((\,|\.)[0-9]{1,2})?$/" ng-disabled="!lista.listaM" placeholder="Preço Entrada Masc."
+                                   class="form-control" ng-model="lista.precoM" type="number" step="0.1" />
+
+                        </div>
+                        <p ng-show="!form.precoM.$valid && form.precoM.$dirty" class="aviso-erro">
+                            Caso deseje informar os centavos use a vírgula seguida de 1 ou 2 dígitos
+                        </p>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Valor Revertido em Consumação Masc.</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><b>R</b><i class="fa fa-dollar"></i></span>
+
+                            <input name="valorConsumaM"
+                                   ng-pattern="/^[0-9]+((\,|\.)[0-9]{1,2})?$/" ng-disabled="!lista.listaM" placeholder="Valor em consumação"
+                                   class="form-control" ng-model="lista.valorConsumaM" type="number" step="0.1" />
+
+                        </div>
+                        <p ng-show="!form.valorConsumaM.$valid && form.valorConsumaM.$dirty" class="aviso-erro">
+                            Caso deseje informar os centavos use a vírgula seguida de 1 ou 2 dígitos
+                        </p>
+                    </div>
+
+
+                    <div class="form-group border-top">
+                        <div class="checkbox c-checkbox">
+                            <label>
+                                <input ng-model="lista.listaF" type="checkbox" />
+                                <span class="fa fa-check"></span><b>Permitir Nomes Femininos</b>
+                            </label>
+                        </div>
+
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><b>R</b><i class="fa fa-dollar"></i></span>
+
+                            <input name="precoF" ng-pattern="/^[0-9]+((\,|\.)[0-9]{1,2})?$/" ng-disabled="!lista.listaF"
+                                   placeholder="Preço Entrada Fem." class="form-control"
+                                   type="number" step="0.1" ng-model="lista.precoF" />
+                        </div>
+                        <p ng-show="!form.precoF.$valid && form.precoF.$dirty" class="aviso-erro">
+                            Caso deseje informar os centavos use a vírgula seguida de 1 ou 2 dígitos
+
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Valor Revertido em Consumação Fem.</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><b>R</b><i class="fa fa-dollar"></i></span>
+
+                            <input name="valorConsumaF"
+                                   ng-pattern="/^[0-9]+((\,|\.)[0-9]{1,2})?$/" placeholder="Valor em consumação" ng-disabled="!lista.listaF"
+                                   class="form-control" ng-model="lista.valorConsumaF" type="number" step="0.1" />
+
+                        </div>
+                        <p ng-show="!form.valorConsumaF.$valid && form.valorConsumaF.$dirty" class="aviso-erro">
+                            Caso deseje informar os centavos use a vírgula seguida de 1 ou 2 dígitos
+                        </p>
+                    </div>
+
+                    <div class="botao-dialog">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary btn-block" ng-click="decrementStep()">
+                                    <i class="fa fa-arrow-circle-left"></i>
+                                    Passo Anterior
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary btn-block" ng-click="incrementStep()">
+                                    Próximo Passo <i class="fa fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div ng-switch-when="3: Agendamentos">
+
+
+
+                    <div class="text-center margin-bot-10 agend-acao">
+                        <p>Deseja Agendar Tarefas para essa Lista?</p>
+                        <div class="row">
+                            <div class="col-xs-offset-1 col-xs-4">
+                                <div class="radio c-radio c-radio-nofont">
+                                    <label>
+                                        <input ng-model="lista.agendarTarefas" ng-value="true" type="radio" />
+                                        <span></span>Sim
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="radio c-radio c-radio-nofont">
+                                    <label>
+                                        <input ng-model="lista.agendarTarefas" ng-value="false" type="radio" />
+                                        <span></span>Não
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="agend-form" ng-show="lista.agendarTarefas == true">
+                        <div class="text-center" ng-show="lista.layoutAgendamentos.length > 0">
+                            <span>Agendamentos:</span>
+                        </div>
+                        <ul class="agends">
+                            <li ng-repeat="a in lista.layoutAgendamentos">
+                                <span ng-show="a.tipoAgendamento == 0">
+                                    <span ng-show="a.fecharListaM">
+                                        Fechar Lista <b>M</b> <br />
+                                    </span>
+                                    <span ng-show="a.fecharListaF">
+                                        Fechar Lista <b>F</b> <br />
+                                    </span>
+                                    {{a.qtdHoras}}h{{a.qtdMinutos}}min
+                                    <span ng-show="a.depoisEvento"><b>Depois</b> do Evento</span>
+                                    <span ng-show="!a.depoisEvento"><b>Antes</b> do Evento</span>
+                                </span>
+                                <span ng-show="a.tipoAgendamento == 1">
+                                    <span ng-show="a.trocarValorM">
+                                        Trocar Valor <b>M</b> para <b>{{a.novoValorM}}</b><br />
+                                    </span>
+                                    <span ng-show="a.trocarValorF">
+                                        Trocar Valor <b>F</b> para <b>{{a.novoValorF}}</b><br />
+                                    </span>
+                                    {{a.qtdHoras}}h{{a.qtdMinutos}}min
+                                    <span ng-show="a.depoisEvento"><b>Depois</b> do Evento</span>
+                                    <span ng-show="!a.depoisEvento"><b>Antes</b> do Evento</span>
+                                </span>
+                                <div ng-click="removeAgend(a)">
+                                    <span class="fa fa-remove"></span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="text-center">
+                            <button class="btn btn-primary" ng-click="openAddAgend()">
+                                <i class="fa fa-plus"></i> Adic. Agendamento
+                            </button>
+                        </div>
+                    </div>
+                    <div class="botao-dialog">
+                        <div class="row ">
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary btn-block" ng-click="decrementStep()"><i class="fa fa-arrow-circle-left"></i> Passo Anterior</button>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <button ng-if="!editarLista" ng-disabled="form.$invalid"
+                                        ng-click="addLista() || closeThisDialog(1)" class="btn btn-success btn-block">
+                                    Criar Layout Lista <i class="fa fa-check"></i>
+                                </button>
+
+                                <button ng-if="editarLista" ng-disabled="form.$invalid"
+                                        ng-click="editaLista() || closeThisDialog(1)" class="btn btn-success btn-block">
+                                    Editar Layout Lista <i class="fa fa-pencil"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</script>
+
+<script type="text/ng-template" id="addAgend">
+    <div class="container-dialog">
+        <div id="agend-box-tipo">
+            <div class="text-center agend-acao">
+                <p>Ação do Agendamento:</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-offset-1 col-sm-5 col-xs-12">
+                    <div class="radio c-radio c-radio-nofont">
+                        <label>
+                            <input ng-model="agend.tipoAgendamento" ng-value="0" type="radio" />
+                            <span></span>Fechar Lista
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="radio c-radio c-radio-nofont">
+                        <label>
+                            <input ng-model="agend.tipoAgendamento" ng-value="1" type="radio" />
+                            <span></span>Alterar Valor Lista
+                        </label>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div ng-switch on="agend.tipoAgendamento">
+            <div ng-switch-when="0">
+                <div class="agend-form">
+                    <form name="agendFechar" novalidate>
+
+                        <div class="margin-bot-10">
+                            <div class="checkbox c-checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="agend.fecharListaM" />
+                                    <span class="fa fa-check"></span>Fechar Lista Masculina
+                                </label>
+                            </div>                                                        
+                        </div>
+                        <div class="margin-bot-10">
+                            <div class="checkbox c-checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="agend.fecharListaF" />
+                                    <span class="fa fa-check"></span>Fechar Lista Feminina
+                                </label>
+                            </div>                                     
+                        </div>
+                        <div class="row">                            
+                            <label>Horas e Minutos em relação ao horário do Evento</label>
+
+                            <div class="form-group col-xs-12">
+                                <div class="radio c-radio c-radio-nofont">
+                                    <label>
+                                        <input ng-model="agend.depoisEvento" ng-value="false" type="radio" />
+                                        <span></span>Antes do Evento
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <div class="radio c-radio c-radio-nofont">
+                                    <label>
+                                        <input ng-model="agend.depoisEvento" ng-value="true" type="radio" />
+                                        <span></span>Depois do Evento
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="agend-tempo" class="margin-bot-10">
+                                <div class="col-xs-12 input-group">
+                                    <span class="input-group-addon">Hrs</span>
+                                    <input name="qtdHoras"
+                                           class="form-control"
+                                           type="number"
+                                           placeholder="Horas"
+                                           ng-model="agend.qtdHoras" />
+                                </div>
+                                <div class="col-xs-12 input-group">
+                                    <span class="input-group-addon">Min</span>
+                                    <input class="form-control"
+                                           name="qtdMinutos"
+                                           ng-model="agend.qtdMinutos"
+                                           type="number"
+                                           placeholder="Minutos"
+                                           ng-pattern="/^([0-5]{1}[0-9]{1}|[0-9]{1})$/" />
+                                </div>
+                                <p class="aviso-erro" ng-show="agendFechar.qtdMinutos.$dirty && agendFechar.qtdMinutos.$error.pattern">
+                                    Informe um Valor de 0-59
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="botao-dialog">
+                        <div class="text-center">
+                            <button ng-click="addAgendamento() || closeThisDialog(1)" class="btn btn-primary">Adic. Agendamento<i class="fa fa-check"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="1">
+                <div class="agend">
+                    <form name="formAgendVal">
+                        <div class="agend-form">
+
+                            <div class="valorM margin-bot-10">
+                                <div class="margin-bot-10">
+                                    <input type="checkbox"
+                                           ng-model="agend.trocarValorM" />
+
+                                    <span> Trocar Valor Masculino</span>
+                                </div>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><b>R</b><i class="fa fa-dollar"></i></span>
+
+                                    <input name="novoValorM" ng-pattern="/^[0-9]+((\,|\.)[0-9]{1,2})?$/" ng-disabled="!agend.trocarValorM"
+                                           placeholder="Novo Valor Entrada Masc." class="form-control"
+                                           type="number" step="0.1" ng-model="agend.novoValorM" />
+                                </div>
+                                <p ng-show="formAgendVal.novoValorM.$invalid && formAgendVal.novoValorM.$dirty" class="aviso-erro">
+                                    Caso deseje informar os centavos use a vírgula seguida de 1 ou 2 dígitos
+                                </p>
+                            </div>
+
+                            <div class="valorF margin-bot-10">
+                                <div class="margin-bot-10">
+                                    <input type="checkbox"
+                                           ng-model="agend.trocarValorF" />
+
+                                    <span> Trocar Valor Feminino</span>
+                                </div>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><b>R</b><i class="fa fa-dollar"></i></span>
+
+                                    <input name="novoValorF" ng-pattern="/^[0-9]+((\,|\.)[0-9]{1,2})?$/" ng-disabled="!agend.trocarValorF"
+                                           placeholder="Novo Valor Entrada Fem." class="form-control"
+                                           type="number" step="0.1" ng-model="agend.novoValorF" />
+                                </div>
+                                <p ng-show="formAgendVal.novoValorF.$invalid && formAgendVal.novoValorF.$dirty" class="aviso-erro">
+                                    Caso deseje informar os centavos use a vírgula seguida de 1 ou 2 dígitos
+                                </p>
+                            </div>
+                            <div class="row">
+                                <div class="text-center">
+                                    <i class="fa fa-time"></i>
+                                </div>
+
+                                <label>Horas e Minutos em relação ao horário do Evento</label>
+
+                                <div class="form-group col-xs-12">
+                                    <div class="radio c-radio c-radio-nofont">
+                                        <label>
+                                            <input ng-model="agend.depoisEvento" ng-value="false" type="radio" />
+                                            <span></span>Antes do Evento
+                                        </label>
+                                    </div>                                                
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <div class="radio c-radio c-radio-nofont">
+                                        <label>
+                                            <input ng-model="agend.depoisEvento" ng-value="true" type="radio" />
+                                            <span></span>Depois do Evento
+                                        </label>
+                                    </div>                                       
+                                </div>
+                                <div id="agend-tempo" class="margin-bot-10">
+                                    <div class="col-xs-12 input-group">
+                                        <span class="input-group-addon">Hrs</span>
+                                        <input name="qtdHoras"
+                                               class="form-control"
+                                               type="number"
+                                               placeholder="Horas"
+                                               ng-model="agend.qtdHoras" />
+                                    </div>
+                                    <div class="col-xs-12 input-group">
+                                        <span class="input-group-addon">Min</span>
+                                        <input class="form-control"
+                                               name="qtdMinutos"
+                                               ng-model="agend.qtdMinutos"
+                                               type="number"
+                                               placeholder="Minutos"
+                                               ng-pattern="/^([0-5]{1}[0-9]{1}|[0-9]{1})$/" />
+                                    </div>
+                                    <p class="aviso-erro" ng-show="agendFechar.qtdMinutos.$dirty && agendFechar.qtdMinutos.$error.pattern">
+                                        Informe um Valor de 0-59
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="botao-dialog">
+                        <div class="text-center">
+                            <button ng-click="addAgendamento() || closeThisDialog(1)" class="btn btn-primary">Adic. Agendamento<i class="fa fa-check"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</script>

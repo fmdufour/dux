@@ -1,0 +1,12 @@
+[
+  "client/bower_components/modernizr/modernizr.custom.js",
+  "client/bower_components/fontawesome/css/font-awesome.min.css",
+  "client/bower_components/fontawesome/fonts/*",
+  "client/bower_components/simple-line-icons/css/simple-line-icons.css",
+  "client/bower_components/simple-line-icons/fonts/*",
+  "client/bower_components/fullcalendar/dist/fullcalendar.css",
+  "client/bower_components/ng-dialog/css/ngDialog.css",
+  "client/bower_components/ng-dialog/css/ngDialog-theme-default.css",
+  "client/bower_components/angular-toastr/dist/angular-toastr.css",
+  "client/bower_components/chosen/*"
+]

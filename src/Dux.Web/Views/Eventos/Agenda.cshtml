@@ -1,0 +1,39 @@
+﻿@{    
+    Layout = null;
+}
+
+@inject IAuthorizationService _authz;
+
+<div class="content-heading">
+
+    @if (await _authz.AuthorizeAsync(User, "Eventos"))
+    {
+        <div class="row">
+            <div class="col-sm-10 col-xs-12">
+                <p>Agenda de Eventos</p>
+            </div>
+            <div class="col-sm-2 col-xs-12 text-center">
+                <button class="btn btn-default" ui-sref="app.eventoscriar">
+                    <i class="fa fa-plus"></i> Adicionar Evento
+                </button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Agenda de Eventos</p>
+    }
+
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-xs-12 text-center">
+                    <div ui-calendar="vm.uiConfig.calendar" ng-model="vm.eventSources"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

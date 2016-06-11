@@ -1,0 +1,19 @@
+﻿@{    
+    Layout = null;    
+}
+
+<div class="row">
+    <div class="col-sm-offset-4 col-sm-4 col-xs-12 text-center">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="casa in vm.casas" ng-click="vm.selecionaCasa(casa)">
+                        <p>
+                            {{casa.nomeCasa}}
+                        </p>                            
+                    </li>
+                </ul>
+            </div>
+        </div>        
+    </div>
+</div>

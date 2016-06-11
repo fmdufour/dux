@@ -1,0 +1,64 @@
+﻿@{    
+    Layout = null;
+}
+
+<div class="content-heading">
+
+        <div class="row">
+            <div class="col-sm-8 col-xs-12">
+                <p>Comissários</p>
+            </div>
+            <div class="col-sm-4 col-xs-12 text-center">
+                <button class="btn btn-default" ui-sref="app.comissariocriar">
+                    <i class="fa fa-plus"></i> Adicionar Comissário
+                </button>
+            </div>
+        </div>
+
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">            
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Nome</th>
+                                <th class="text-center">Login</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Bloquear</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="comissario in vm.comissarios">
+                                <td class="text-center">{{ comissario.nome }}</td>
+                                <td class="text-center">{{ comissario.email }}</td>
+                                <td class="text-center">
+                                    <span ng-if="comissario.status == 0">
+                                        Ativo
+                                    </span>
+                                    <span ng-if="comissario.status == 1">
+                                        Bloqueado
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div ng-switch on="comissario.status">
+                                        <button ng-show="comissario.status == 0" ng-click="vm.bloquear(comissario)" class="btn btn-default">
+                                            <i class="fa fa-ban"></i>
+                                        </button>
+
+                                        <button ng-show="comissario.status == 1" ng-click="vm.desbloquear(comissario)" class="btn btn-default">
+                                            <i class="fa fa-check-circle-o"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

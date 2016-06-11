@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br" data-ng-app="externalPagesModule">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Sistema Dux - Reset Senha</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/app.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div ng-controller="esqueciSenhaController as vm" class="block-center mt-xl wd-xl">
+        <div class="panel panel-dark panel-flat">
+            <div class="panel-body">
+                <div ng-switch on="vm.enviado">
+                    <div ng-switch-when="false">
+                        <div class="text-center">
+                            <b>Pedir nova senha</p>
+                        </div>
+                        <form role="form" novalidate="" name="reset" class="form-validate mb-lg">
+                            <div class="form-group">
+                                <input id="email" type="email" name="email" ng-model="vm.email" placeholder="Email" autocomplete="off" ng-required="true" class="form-control" />
+                                <span ng-show="reset.email.$dirty && reset.email.$error.required" class="text-danger">Informe seu email</span>
+                                <span ng-show="reset.email.$dirty && reset.email.$error.email" class="text-danger">Informe um email válido</span>
+                            </div>
+                            <button type="submit" 
+                                    ng-disabled="reset.$invalid"
+                                    class="btn btn-block btn-primary" 
+                                    ng-click="vm.novaSenha()">
+                                Pedir nova senha
+                            </button>
+                        </form>
+                    </div>
+                    <div ng-switch-when="true">
+                        <p>O formulário para configuração da nova senha foi enviado para o email informado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/externalpages/vendor/angular.min.js"></script>
+    <script src="~/externalpages/vendor/angular-local-storage.min.js"></script>
+    <script src="~/externalpages/externalpagesmodule.js"></script>
+    <script src="~/externalpages/login/loginservice.js"></script>
+    <script src="~/externalpages/senha/esquecisenhacontroller.js"></script>
+
+</body>
+</html>

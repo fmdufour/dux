@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br" data-ng-app="externalPagesModule">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="{{app.description}}">    
+    <title>Sistema Dux - Login</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/app.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div ng-controller="loginController as login" class="block-center mt-xl wd-xl">
+        <div class="panel panel-dark panel-flat">
+            @*<div class="panel-heading text-center">
+                @*<a href="#">
+                    <img src="~/Images/logo.png" alt="Image" class="block-center img-rounded" />
+                </a>
+            </div>*@
+            <div class="panel-body">
+                <div class="text-center">
+                    <h1>DUX</h1>
+                </div>
+                <p class="text-center pv">LOGIN NO SISTEMA</p>
+                <form role="form" ng-submit="login.login()" novalidate="" class="form-validate mb-lg">
+                    <div class="form-group has-feedback">
+                        <input id="email" type="email" name="username" ng-model="login.loginForm.username" placeholder="Email" autocomplete="off"  required="" class="form-control" />
+                        <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="password" type="password" ng-model="login.loginForm.password" name="password" placeholder="Senha" required="" class="form-control" />
+                        <span class="fa fa-lock form-control-feedback text-muted"></span>
+                    </div>
+                    <div class="clearfix">
+                        <div class="block-center">
+                            <a href="/Usuario/EsqueciSenha" class="text-muted">Esqueceu sua senha?</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-primary mt-lg">Login</button>
+                </form>
+                <div ng-show="login.authMsg" class="alert alert-danger text-center">{{login.authMsg}}</div>
+            </div>
+        </div>
+        <!-- END panel-->
+        <div class="p-lg text-center">
+            <span>&copy;</span>
+            <span ng-bind="app.year"></span>
+            <span>-</span>
+            <span ng-bind="app.name"></span>
+            <br />
+            <span ng-bind="app.description"></span>
+        </div>
+    </div>        
+    
+    <script src="~/externalpages/vendor/angular.min.js"></script> 
+    <script src="~/externalpages/vendor/angular-local-storage.min.js"></script>
+    <script src="~/externalpages/externalpagesmodule.js"></script>    
+    <script src="~/externalpages/login/loginservice.js"></script>
+    <script src="~/externalpages/login/logincontroller.js"></script>
+    
+</body>
+</html>

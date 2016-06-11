@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="row">
+        <div class="col-sm-offset-1 col-sm-10 col-xs-12 text-center">
+            <div class="row">
+                <div class="col-xs-12 col-sm-5 panel panel-default panel-lista" ui-sref="app.portariaverlistageral({ id : {{vm.eventoId}} })">
+                    <div class="panel-body box-lista">
+                        <div class="row text-center">
+                            <div class="col-xs-12 titulo">
+                                <p>Lista Geral - {{vm.evento.nomeEvento}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-5 panel panel-default panel-lista" ng-repeat="lista in vm.listas" ui-sref="app.portariaverlista({ id : {{lista.id}} })">
+                    <div class="panel-body box-lista">
+                        <div class="row text-center">
+                            <div class="col-xs-12 titulo">
+                                <p>{{lista.nomeLista}}</p>
+                            </div>
+
+                            <div ng-if="lista.listaM" class="margin-bot-5" ng-class="{ 'col-xs-12' : !lista.listaF, 'col-xs-6' : lista.listaF}">
+                                <i class="fa fa-male masc"></i>
+                                <span class="preco">
+                                    <span ng-if="lista.precoM != 0">
+                                        {{lista.precoM | currency}}
+                                    </span>
+                                    <span ng-if="lista.precoM == 0">
+                                        FREE
+                                    </span>
+                                </span>
+                            </div>
+                            <div ng-if="lista.listaF" class="margin-bot-5" ng-class="{ 'col-xs-12' : !lista.listaM, 'col-xs-6' : lista.listaM}">
+                                <i class="fa fa-female fem"></i>
+                                <span class="preco">
+                                    <span ng-if="lista.precoF != 0">
+                                        {{lista.precoF | currency}}
+                                    </span>
+                                    <span ng-if="lista.precoF == 0">
+                                        FREE
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div ng-if="lista.listaM" ng-class="{ 'col-xs-12' : !lista.listaF, 'col-xs-6' : lista.listaF}">
+                                <i class="fa fa-glass" style="color:rgba(116, 31, 31, 0.7)"></i>
+                                <span class="preco">
+                                    {{lista.valorConsumaM | currency}}
+                                </span>
+                            </div>
+                            <div ng-if="lista.listaF" ng-class="{ 'col-xs-12' : !lista.listaM, 'col-xs-6' : lista.listaM}">
+                                <i class="fa fa-glass" style="color:rgba(23, 23, 125, 0.7)"></i>
+                                <span class="preco">
+                                    {{lista.valorConsumaF | currency}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

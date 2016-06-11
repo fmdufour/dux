@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+
+
+<div class="content-heading">
+    <p>Definição de Acessos : {{vm.usuario.nome}} {{vm.usuario.sobrenome}}</p>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-success" ng-click="vm.defineAcessos()">
+                            Definir Acessos <i class="fa fa-check"></i>
+                        </button>
+                    </div>       
+                    <div class="col-xs-6 text-center">
+                        <b>Acessos disponíveis no sistema</b>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                        <b>Acessos que o Usuário possui</b>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="thumbnail"
+                             data-drop="true"
+                             ng-model="vm.todosAcessos"
+                             style="min-height:500px"
+                             jqyoui-droppable="{multiple: true}">
+
+                            <div class="btn btn-info btn-block sem-animacoes"
+                                 ng-repeat="acesso in vm.todosAcessos"
+                                 data-drag="true"
+                                 data-jqyoui-options="{revert: 'invalid'}"
+                                 ng-model="vm.todosAcessos"
+                                 jqyoui-draggable="{index: {{$index}}}"
+                                 ng-hide="!acesso.descricao">
+                                {{acesso.descricao}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="thumbnail"
+                             data-drop="true"
+                             ng-model="vm.perfil.acessos"
+                             style="min-height:500px"
+                             jqyoui-droppable="{multiple:true}">
+
+                            <div class="btn btn-success btn-block sem-animacoes" 
+                                 ng-repeat="acesso in vm.perfil.acessos" 
+                                 ng-show="acesso.descricao" 
+                                 data-drag="true" 
+                                 data-jqyoui-options="{revert: 'invalid'}" 
+                                 ng-model="vm.perfil.acessos" 
+                                 jqyoui-draggable="{index: {{$index}}}">
+                                {{acesso.descricao}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

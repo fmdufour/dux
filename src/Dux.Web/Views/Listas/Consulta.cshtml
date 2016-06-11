@@ -1,0 +1,110 @@
+﻿@{
+    Layout = null;
+}
+
+@inject IAuthorizationService _authz
+
+<div class="content-heading">
+
+    @if (await _authz.AuthorizeAsync(User, "Listas"))
+    {
+        <div class="row">
+            <div class="col-sm-10 col-xs-12">
+                <p>Listas do Evento {{vm.evento.nomeEvento}}</p>
+            </div>
+            <div class="col-sm-2 col-xs-12 text-center">
+                <button class="btn btn-default" ui-sref="app.listascriar({eventoId : {{vm.eventoId}}})">
+                    <i class="fa fa-plus"></i> Criar Lista
+                </button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Listas do Evento {{vm.evento.nomeEvento}}</p>
+    }
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div ng-if="vm.listas.length > 0" class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Nome</th>
+                                <th class="text-center">Masc.</th>
+                                <th class="text-center">Fem.</th>
+                                @if (await _authz.AuthorizeAsync(User, "Listas"))
+                                {
+                                    <th class="text-center">Editar</th>
+                                    <th class="text-center">Agendamentos</th>
+                                    <th class="text-center">Distribuir Conv.</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="lista in vm.listas">
+                                <td class="text-center">{{ lista.nomeLista}}</td>
+                                <td class="text-center">
+                                    <span ng-if="lista.listaM">
+                                        <i class="fa fa-male"></i><b>  {{lista.precoM | currency}}</b>
+                                    </span>
+                                    <span ng-if="!lista.listaM">
+                                        <i class="fa fa-thumbs-o-down"></i>
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-if="lista.listaF">
+                                        <i class="fa fa-female"></i><b>  {{lista.precoF | currency}}</b>
+                                    </span>
+                                    <span ng-if="!lista.listaF">
+                                        <i class="fa fa-thumbs-o-down"></i>
+                                    </span>
+                                </td>
+                                @if (await _authz.AuthorizeAsync(User, "Listas"))
+                                {
+                                    <td class="text-center">
+                                        <button class="btn btn-default"
+                                                ui-sref="app.listascriar({id:{{lista.id}}, eventoId:{{vm.eventoId}}})">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-default">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-default"
+                                                ui-sref="app.distribuicao({listaId:{{lista.id}}})">
+                                            <i class="fa fa-group"></i>
+                                        </button>
+                                    </td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cadastro-vazio" ng-if="vm.listas.length == 0">
+                    <span class="cara-triste">):</span>                    
+                    <span class="texto-vazio">Ainda não existem Listas criadas para esse Evento</span>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="excluirPerfil">
+
+    <div class="dialog-contents">
+        <p>
+            Você tem certeza que quer excluir esse Perfil?
+        </p>
+        <button class="btn btn-danger" ng-click="confirm()">Sim</button>
+        <button class="btn btn-default" ng-click="closeThisDialog()">Cancelar</button>
+    </div>
+</script>

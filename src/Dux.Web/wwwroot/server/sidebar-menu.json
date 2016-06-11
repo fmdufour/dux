@@ -1,0 +1,65 @@
+[
+  {
+    "text": "",
+    "heading": true,
+    "oculto": true
+  },
+  {
+    "text": "Listas",
+    "sref": "",
+    "icon": "fa fa-copy",
+    "oculto": true
+  },
+  {
+    "text": "Portaria",
+    "sref": "",
+    "icon": "fa fa-list",
+    "oculto": true
+  },
+  {
+    "text": "Promoter",
+    "heading": true,
+    "oculto": true
+  },
+  {
+    "text": "Adicionar Nomes",
+    "sref": "",
+    "icon": "fa fa-group",
+    "oculto": true
+  },
+  {
+    "text": "Distrib. p/ Comissarios",
+    "sref": "",
+    "icon": "fa fa-sitemap",
+    "oculto": true
+  },
+  {
+    "text": "Menu",
+    "heading": "true"
+  },
+  {
+    "text": "Agenda",
+    "sref": "app.eventosagenda",
+    "icon": "fa fa-calendar",
+    "oculto": false
+  },
+  {
+    "text": "Perfis",
+    "sref": "app.perfis",
+    "icon": "fa fa-file-o",
+    "oculto": false
+  },
+
+  {
+    "text": "Usuarios",
+    "sref": "app.usuarios",
+    "icon": "fa fa-user",
+    "oculto": false
+  },
+  {
+    "text": "Meus Comissarios",
+    "sref": "app.comissarios",
+    "icon": "fa fa-group",
+    "oculto": false
+  }
+]

@@ -1,0 +1,624 @@
+/*!
+ * 
+ * Angle - Bootstrap Admin App + AngularJS
+ * 
+ * Version: 3.2.0
+ * Author: @themicon_co
+ * Website: http://themicon.co
+ * License: https://wrapbootstrap.com/help/licenses
+ * 
+ */
+
+// Bootstrap
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+// Bootstrap reset
+@import "app/bootstrap-reset";
+
+// Bootstrap Variables and Mixins
+// @import "bootstrap/variables";
+// @import "bootstrap/mixins";
+
+// Global definition of media queries
+@import "app/media-queries.less";
+
+// Typography
+@import "app/typo";
+
+// Layout
+@import "app/layout";
+@import "app/layout-extra";
+@import "app/layout-animation";
+@import "app/top-navbar";
+@import "app/sidebar";
+@import "app/user-block.less";
+@import "app/offsidebar";
+
+
+// Components
+@import "app/preloader";
+@import "app/breadcrumbs";
+@import "app/loading-bar";
+@import "app/animate";
+
+// Utilities 
+@import "app/utils";
+
+// Print CSS
+@import "app/print";
+
+
+// CHECKBOX E RADIO
+
+//
+// CHECKBOX AND RADIOS
+// 
+
+@ui-fg-color: @brand-primary;
+@ui-bg-color: #ddd;
+
+.c-checkbox,
+.c-radio {
+  margin-right: 4px;
+  * {
+    cursor: pointer;
+  }
+  input {
+    opacity: 0;
+    position: absolute;
+    margin-left: 0 !important;
+  }
+  
+  // the element that replaces the input
+  span {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: -20px;
+    width: 20px; height: 20px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    text-align: center;
+    &:before {
+      margin-left: 0; // fa align trick
+    }
+  }
+
+  &:hover span {
+    border-color: @ui-fg-color;
+  }
+
+  .form-inline & span {
+    margin-left: 0;
+  }
+
+  &.c-checkbox-rounded,
+  &.c-radio-rounded {
+    span {
+      border-radius: 500px;
+    }
+  }
+
+}
+
+
+/* override for radio */
+.c-radio span {
+  border-radius: 500px;
+}
+
+/* the icon */
+.c-checkbox,
+.c-radio {
+  span:before {
+    //content: "\2713"; /* comment content to use custom icon classes */
+    position: absolute;
+    top: 0; left: 0;  right: 0; bottom: 0;
+    opacity: 0;
+    text-align: center !important;
+    font-size: 12px;
+    line-height: 18px;
+    vertical-align: middle;
+  }
+}
+
+
+
+
+/* Checked state */
+.c-checkbox,
+.c-radio {
+  input[type=checkbox]:checked + span:before,
+  input[type=radio]:checked + span:before{
+    color: #fff;
+    opacity: 1;
+    transition: color .3s ease-out;
+  }
+
+  input[type=checkbox]:checked + span,
+  input[type=radio]:checked + span {
+    border-color: @ui-fg-color;
+    background-color: @ui-fg-color;
+  }
+
+  /* override for radio */
+  input[type=radio]:checked + span{
+    background-color: #fff;
+    &:before{ 
+      color: @ui-fg-color;
+    }
+  }
+
+  /* Disable state */
+
+  input[type=checkbox]:disabled + span,
+  input[type=radio]:disabled + span{
+    border-color: @ui-bg-color !important;
+    background-color: @ui-bg-color !important;
+  }
+  /* override for radio */
+  input[type=radio]:disabled + span {
+    background-color: #fff !important;
+    &:before {
+      color: @ui-bg-color;
+    }
+  }
+}
+
+
+.c-radio.c-radio-nofont {
+  span {
+    &:before {
+      @sz: 10px;
+      content: "";
+      width: @sz; height: @sz;
+      top: 50%; left: 50%;
+      margin-top: -(@sz/2);
+      margin-left: -(@sz/2);
+      border-radius: 500px;
+      
+    }
+  }
+
+  input[type=radio]:checked + span:before{
+    color: #fff;
+    opacity: 1;
+    transition: color .3s ease-out;
+  }
+
+  input[type=radio]:checked + span {
+    border-color: @ui-fg-color;
+    background-color: @ui-fg-color;
+  }
+
+  /* override for radio */
+  input[type=radio]:checked + span{
+    background-color: #fff;
+    &:before{ 
+      background-color: @ui-fg-color;
+    }
+  }
+
+  /* Disable state */
+
+  input[type=radio]:disabled + span{
+    border-color: @ui-bg-color !important;
+    background-color: @ui-bg-color !important;
+  }
+  /* override for radio */
+  input[type=radio]:disabled + span {
+    background-color: #fff !important;
+    &:before {
+      background-color: @ui-bg-color;
+    }
+  }
+
+}
+//FIM CHECKBOX E RADIO
+
+
+.form-lista .input-group{
+    margin-bottom:15px;
+}
+
+.aviso-erro{
+    font-size: 11px;
+    color: #FD0000;
+}
+
+.btn-pesquisa{
+    display:inline-block;
+    width:20%;
+}
+
+.container-pesquisa{
+    width:100%;
+}
+
+.container-pesquisa > .input-pesquisa {
+    width:80%;
+    margin-bottom:0
+}
+
+
+.dropdown-pesquisa{
+    width:100%;
+}
+.dropdown-pesquisa > li{
+    border-bottom: 1px solid @border-color;
+}
+.dropdown-pesquisa > li:last-child{
+    border-bottom: 0;
+}
+
+.container-dialog {
+    background-color: white;
+    border: 1px solid @border-color;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.container-dialog b,label,p{
+    font-size:1em;
+    font-family: "Roboto", sans-serif;
+}
+
+#agend-box-tipo{
+    margin-bottom: 10px;
+}
+
+.margin-bot-10{
+    margin-bottom:10px;
+}
+
+.agend-form{
+    border-top: 1px solid @border-color;
+    padding-top: 20px;
+    margin-bottom:20px;
+}
+
+.agend-acao > p{
+    font-size:1.1em;
+}
+
+.agends{
+    list-style-type: none;
+}
+
+.agends > li {
+    border: 1px solid @border-color;
+    position: relative;
+    left: -20px;
+    padding: 0 10px 0 10px;
+    background-color: rgba(228, 0, 0, 0.1);
+    margin:3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.botao-dialog{
+    border-top: 1px solid @border-color;
+    padding-top: 20px;
+}
+.agends div{
+    display: inline-block;
+    position: absolute;
+    right: 7px;
+}
+
+.cadastro-vazio{
+    text-align: center;
+    margin:10px 0 10px 0;
+}
+
+.cadastro-vazio > .cara-triste{
+    font-size: 50px;
+    display: block;
+}
+
+.cadastro-vazio > .texto-vazio{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cor-evento{
+    border: 2px solid @border-color;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;    
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
+}
+
+.evento-selec{
+    position: relative;
+    right: -9px;
+    color: red;
+}
+
+.blue{
+    background-color: blue;
+}
+
+.red{
+    background-color: red;
+}
+
+.purple{
+    background-color:pink;
+}
+
+.green{
+    background-color: green;
+}
+
+.yellow{
+    background-color: yellow;
+}
+
+.black{
+    background-color: black;
+}
+
+.cores-evento > .col-xs-2{
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.cores-evento{
+    margin-left:10px
+}
+
+@media (max-width: 480px) {
+    .cores-evento{
+        margin-left:-12px;
+    }
+}
+
+.margin-left-10{
+    margin-left:10px;
+}
+
+
+.sem-animacoes {
+
+ /*CSS transitions*/
+
+ -o-transition-property: none !important;
+
+ -moz-transition-property: none !important;
+
+ -webkit-transition-property: none !important;
+
+ transition-property: none !important;
+
+ /*CSS transforms*/
+
+ -o-transform: none !important;
+
+ -moz-transform: none !important;
+
+ -ms-transform: none !important;
+
+ -webkit-transform: none !important;
+
+ transform: none !important;
+
+ /*CSS animations*/
+
+ -webkit-animation: none !important;
+
+ -moz-animation: none !important;
+
+ -o-animation: none !important;
+
+ animation: none !important;
+
+}
+
+.perfis-bloco .panel-body {
+    padding-top: 30px;
+}
+
+.perfis-bloco > div{
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    cursor: pointer;
+}
+
+
+.box-lista .masc {
+    font-size: 30px;
+    color: rgba(116, 31, 31, 0.7);
+}
+.box-lista .fem {
+    font-size: 30px;
+    color: rgba(23, 23, 125, 0.7);
+}
+
+.box-lista .copo {
+    font-size: 20px;
+}
+
+.box-lista qtd-nomes{
+    position: relative;
+    top: -2px;
+}
+
+.box-lista .titulo{
+    border-bottom: 1px solid #D5D5D5;
+    margin-bottom: 30px;
+}
+
+.titulo>p{
+    font-size:18px;
+    font-weight:bold;
+}
+
+
+.box-lista .preco{
+    color: rgb(71, 147, 71);
+    border: 1px solid rgba(0, 128, 0, 0.21);
+    border-radius: 5px;    
+    margin-top: 5px;
+    display: block;
+}
+
+.box-lista .consuma{
+    margin-top:10px
+}
+
+.panel-lista{
+    margin-right: 30px;
+}
+
+.lista-editar-fix{
+    height:100px;
+}
+
+@media (max-width: 768px) {
+    .lista-editar-fix{
+        height:0;
+    }
+}
+
+.border-top{
+    border-top:1px solid @border-color;
+}
+
+.margin-bot-5{
+    margin-bottom:5px;
+}
+
+
+.padrao-preench{
+    text-align:center;    
+    border: 1px solid rgba(128, 128, 128, 0.22);
+    border-bottom: 1px solid rgb(245, 247, 250);
+    padding: 5px 0 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    margin: 10px 0 10px 0;
+}
+
+.padrao-preench > .instrucao{
+    font-size: 17px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px){
+ .padrao-preench > span{
+    font-size: 10px;
+    }
+}
+
+.padrao-preench > .genero {
+    background-color: rgba(255, 0, 0, 0.68);    
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.46);
+    border-radius: 6px;
+    padding: 1px 5px 1px 5px;
+    color: white;
+    margin: 0 5px 0 5px;
+}
+
+.padrao-preench > .nome {
+    background-color: rgba(39, 0, 255, 0.68); 
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.46);
+    border-radius: 6px;
+    padding: 1px 5px 1px 5px;
+    color: white;
+    margin: 0 5px 0 5px;
+}
+
+.padrao-preench > .celular {
+    background-color: rgba(192, 0, 255, 0.68);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.46);
+    border-radius: 6px;
+    padding: 1px 5px 1px 5px;
+    color: white;
+    margin: 0 5px 0 5px;
+}
+
+.padrao-preench > .rg {
+    background-color: rgba(255, 82, 0, 0.68);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.46);
+    border-radius: 6px;
+    padding: 1px 5px 1px 5px;
+    color: white;
+    margin: 0 5px 0 5px;
+}
+
+.nomes-disponiveis{
+    text-align: center;   
+    position: relative;
+    top: 30px;     
+}
+
+.nomes-disponiveis > .nomes-masc{
+    display: inline-block;
+    font-size: 18px;
+    color: rgba(116, 31, 31, 0.7);        
+    padding: 5px;
+    font-weight: bold;
+}
+
+.nomes-disponiveis > .nomes-fem{
+    display: inline-block;
+    font-size: 18px;
+    color: rgba(23, 23, 125, 0.7);
+    padding: 5px;
+    font-weight: bold;
+}
+
+.nomes-disponiveis > .erros-nomes{
+    display: inline-block;
+    font-size: 18px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+
+.addnome-regras{
+    max-height: 100px;
+    overflow-y: scroll;
+    border: 1px solid @border-color;
+    margin: 5px 0 0 5px;
+}
+
+
+.panel.panel-default{
+    border-top-width:2px;
+}
+
+.panel{
+    border-radius:0
+}
+
+.info-lista{
+    text-align:center;    
+    border: 1px solid rgba(128, 128, 128, 0.22);
+    border-bottom: 1px solid rgb(245, 247, 250);
+    padding: 5px 0 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    margin: 10px 0 10px 0;
+}
+
+.info-lista > .nome-lista{
+    font-size:25px;
+}
+
+.preco-f,.preco-m > i {
+    font-size: 18px;
+    margin-right: 5px;    
+}
+
+.consuma-m,.consuma-f > i{
+    margin-right:5px;
+}
+
+.box-lista-m{
+    border-right:1px solid @border-color;
+}
+
+.margin-top-10{
+    margin-top:10px;
+}

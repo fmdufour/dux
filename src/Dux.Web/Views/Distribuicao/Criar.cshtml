@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;
+}
+<div class="content-heading">
+    <p>Distribuir Convidados</p>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <div class="text-center margin-bot-10">
+                    <button class="btn btn-primary" ng-click="vm.salvaDistribuicao()">
+                        Distribuir Convidados
+                    </button>
+                </div>
+                <div class="bg-danger-light validationErrors" ng-show="vm.validationErrors && vm.validationErrors.length">
+                    <ul>
+                        <li ng-repeat="error in vm.validationErrors">{{error}}</li>
+                    </ul>
+                </div>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="40%">Nome Promoter</th>
+                            <th width="60%">Qtd. de Convidados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="d in vm.dist.distribuicoes">
+                            <td>{{ d.nome  }}</td>
+                            <td>
+                                <div class="col-xs-12">
+                                    <div class="row" style="margin-bottom:5px">
+                                        <div class="col-sm-2 col-xs-4" style="text-align:center">
+                                            <em class="fa fa-2x fa-female"></em>
+                                        </div>
+                                        <div class="col-sm-10 col-xs-8">
+                                            <input class="form-control" style="display:inline-block" ng-model="d.qtdNomesF" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-sm-2 col-xs-4" style="text-align:center">
+                                            <em class="fa fa-2x fa-male"></em>
+                                        </div>
+                                        <div class="col-sm-10 col-xs-8">
+                                            <input class="form-control" style="display:inline-block" ng-model="d.qtdNomesM" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

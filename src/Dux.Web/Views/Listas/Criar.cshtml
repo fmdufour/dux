@@ -1,0 +1,179 @@
+﻿@{    
+    Layout = null;
+}
+<div class="content-heading">
+    <p>Criar Lista</p>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">            
+            <div class="panel-body">
+                <form name="lista" novalidate autocomplete="off">
+                    <div class="bg-danger-light validationErrors" ng-show="vm.validationErrors && vm.validationErrors.length > 0">
+                        <ul>
+                            <li ng-repeat="error in vm.validationErrors">{{error}}</li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+
+                            <div class="form-group">
+                                <label>Nome da Lista:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-info"></i></span>
+                                    <input class="form-control"
+                                           name="nomeLista"
+                                           ng-model="vm.lista.nomeLista"
+                                           ng-required="true" />
+                                </div>
+                                <p ng-show="lista.nomeLista.$error.required && lista.nomeLista.$dirty" class="aviso-erro">
+                                    Digite o nome da lista
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xs-12">
+                            <div ng-if="!vm.editar" class="form-group">
+                                <div uib-dropdown>
+                                    <label>Perfil de Distribuição</label>
+                                    <div class="input-group">
+                                        <input name="perfilDist" class="form-control" placeholder="Nenhum Perfil Selecionado"
+                                               ng-model="vm.perfilSelecionado" style="margin-bottom:0" readonly />
+
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" uib-dropdown-toggle>
+                                                <span class="caret">
+                                                </span>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                    <ul uib-dropdown-menu class="dropdown-pesquisa">
+                                        <li ng-click="vm.limpaPerfil()">  <a> <i class="fa fa-remove"></i> Limpar Escolha </a></li>
+                                        <li ng-repeat="a in vm.perfisDist">
+                                            <a ng-click="vm.selecionaPerfil(a)">
+                                                {{a.nomePerfil}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div ng-if="vm.editar" class="lista-editar-fix">
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <div class="checkbox c-checkbox">
+                                    <label>
+                                        <input ng-model="vm.lista.listaM" type="checkbox" />
+                                        <span class="fa fa-check"></span> Permitir Nomes Masculinos
+                                    </label>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><b>R</b><i class="fa fa-dollar"></i></span>
+
+                                    <input name="precoM"
+                                           ng-pattern="/^[0-9]+((\,|\.)[0-9]{1,2})?$/" ng-disabled="!vm.lista.listaM" placeholder="Preço Entrada Masc."
+                                           class="form-control" ng-model="vm.lista.precoM" type="number" step="0.1" />
+
+                                </div>
+                                <p ng-show="!lista.precoM.$valid && lista.precoM.$dirty" class="aviso-erro">
+                                    Caso deseje informar os centavos use a vírgula seguida de 1 ou 2 dígitos
+                                </p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Valor Revertido em Consumação Masc.</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><b>R</b><i class="fa fa-dollar"></i></span>
+
+                                    <input name="valorConsumaM"
+                                           ng-pattern="/^[0-9]+((\,|\.)[0-9]{1,2})?$/" placeholder="Valor em consumação"
+                                           class="form-control" ng-model="vm.lista.valorConsumaM" type="number" step="0.1" />
+
+                                </div>
+                                <p ng-show="!lista.valorConsumaM.$valid && lista.valorConsumaM.$dirty" class="aviso-erro">
+                                    Caso deseje informar os centavos use a vírgula seguida de 1 ou 2 dígitos
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <div class="checkbox c-checkbox">
+                                    <label>
+                                        <input ng-model="vm.lista.listaF" type="checkbox" />
+                                        <span class="fa fa-check"></span> Permitir Nomes Femininos
+                                    </label>
+                                </div>
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><b>R</b><i class="fa fa-dollar"></i></span>
+
+                                    <input name="precoF" ng-pattern="/^[0-9]+((\,|\.)[0-9]{1,2})?$/" ng-disabled="!vm.lista.listaF"
+                                           placeholder="Preço Entrada Fem." class="form-control"
+                                           type="number" step="0.1" ng-model="vm.lista.precoF" />
+                                </div>
+                                <p ng-show="!lista.precoF.$valid && lista.precoF.$dirty" class="aviso-erro">
+                                    Caso deseje informar os centavos use a vírgula seguida de 1 ou 2 dígitos
+                                </p>
+                            </div>
+                            <div class="form-group">
+
+                                <label>Valor Revertido em Consumação Fem.</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><b>R</b><i class="fa fa-dollar"></i></span>
+
+                                    <input name="valorConsumaF"
+                                           ng-pattern="/^[0-9]+((\,|\.)[0-9]{1,2})?$/" placeholder="Valor em consumação"
+                                           class="form-control" ng-model="vm.lista.valorConsumaF" type="number" step="0.1" />
+
+                                </div>
+                                <p ng-show="!lista.valorConsumaF.$valid && lista.valorConsumaF.$dirty" class="aviso-erro">
+                                    Caso deseje informar os centavos use a vírgula seguida de 1 ou 2 dígitos
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <div class="checkbox c-checkbox">
+                                    <label>
+                                        <input ng-model="vm.lista.exigirCelular" type="checkbox" />
+                                        <span class="fa fa-check"></span> Exigir número de celular
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox c-checkbox">
+                                    <label>
+                                        <input ng-model="vm.lista.exigirRg" type="checkbox" />
+                                        <span class="fa fa-check"></span> Exigir número do RG
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <span ng-if="vm.editar">
+                            <button class="btn btn-primary" ng-click="vm.salvaLista()">
+                                Editar Lista <i class="fa fa-pencil"></i>
+                            </button>
+                        </span>
+                        <span ng-if="!vm.editar">
+                            <button class="btn btn-success" ng-click="vm.salvaLista()">
+                                Criar Lista <i class="fa fa-check"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>                
+        </div>
+    </div>
+</div>
+

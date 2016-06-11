@@ -1,0 +1,15 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    //-------- Files configuration --------
+    // Configure glob patterns for excluding files and folders.
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.DS_Store": true,
+        "**/**.xproj**": true,
+        "**/bin": true,
+        "**/.vs":true,
+        "**/obj":true,
+        "**/project.lock.json" : true
+    }
+}

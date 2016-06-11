@@ -1,0 +1,116 @@
+<!-- START Top Navbar-->
+<nav role="navigation" class="navbar topnavbar">
+   <!-- START navbar header-->
+   <div class="navbar-header">
+      <a href="#/" class="navbar-brand">
+         <div class="brand-logo">
+            @*<img src="~/Images/logo.png" alt="App Logo" class="img-responsive" />*@
+         </div>
+         <div class="brand-logo-collapsed">
+            @*<img src="~/Images/logo-single.png" alt="App Logo" class="img-responsive" />*@
+         </div>
+      </a>
+   </div>
+   <!-- END navbar header-->
+   <!-- START Nav wrapper-->
+   <div class="nav-wrapper">
+      <!-- START Left navbar-->
+      <ul class="nav navbar-nav">
+         <li>
+            <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+            <a href="" trigger-resize="" ng-click="app.layout.isCollapsed = !app.layout.isCollapsed" class="hidden-xs">
+               <em class="fa fa-navicon"></em>
+            </a>
+            <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+            <a href="" ng-click="app.asideToggled = !app.asideToggled" class="visible-xs sidebar-toggle">
+               <em class="fa fa-navicon"></em>
+            </a>
+         </li>
+          <li>
+              <a ui-sref="app.usuariocasas">
+                  <em class="icon-home"></em>
+              </a>
+          </li>
+      </ul>
+      <!-- END Left navbar-->
+      <!-- START Right Navbar-->
+      <ul class="nav navbar-nav navbar-right">
+          <!-- START Alert menu-->
+          <li uib-dropdown="" class="dropdown dropdown-list">
+              <a uib-dropdown-toggle="">
+                  <em class="icon-bell"></em>
+                  <div class="label label-danger">11</div>
+              </a>
+              <!-- START Dropdown menu-->
+              <ul class="dropdown-menu animated flipInX">
+                  <li>
+                      <!-- START list group-->
+                      <div class="list-group">                         
+                          <!-- list item-->
+                          <a href="" class="list-group-item">
+                              <div class="media-box">
+                                  <div class="pull-left">
+                                      <em class="fa fa-envelope fa-2x text-warning"></em>
+                                  </div>
+                                  <div class="media-box-body clearfix">
+                                      <p class="m0">Nova Mensagem</p>
+                                      <p class="m0 text-muted">
+                                          <small>Você tem 10 novos emails</small>
+                                      </p>
+                                  </div>
+                              </div>
+                          </a>
+                          <!-- list item-->
+                          <a href="" class="list-group-item">
+                              <div class="media-box">
+                                  <div class="pull-left">
+                                      <em class="fa fa-tasks fa-2x text-success"></em>
+                                  </div>
+                                  <div class="media-box-body clearfix">
+                                      <p class="m0">Novas metas</p>
+                                      <p class="m0 text-muted">
+                                          <small>5 novas metas</small>
+                                      </p>
+                                  </div>
+                              </div>
+                          </a>
+                          <!-- last list item -->
+                          <a href="" class="list-group-item">
+                              <small>Novas notificações</small>
+                              <span class="label label-danger pull-right">14</span>
+                          </a>
+                      </div>
+                      <!-- END list group-->
+                  </li>
+              </ul>
+              <!-- END Dropdown menu-->
+          </li>
+          <!-- END Alert menu-->
+         <!-- Search icon-->
+         @*<li>
+            <a search-open="">
+               <em class="icon-magnifier"></em>
+            </a>
+         </li>*@
+         <!-- START Offsidebar button-->
+         @*<li>
+            <a href="" ng-click="app.offsidebarOpen = !app.offsidebarOpen">
+               <em class="icon-notebook"></em>
+            </a>
+         </li>*@
+         <!-- END Offsidebar menu-->
+      </ul>
+      <!-- END Right Navbar-->
+   </div>
+   <!-- END Nav wrapper-->
+   <!-- START Search form-->
+   <form role="search" action="search.html" class="navbar-form">
+      <div class="form-group has-feedback">
+         <input type="text" id="txtPesquisa" ng-model="txtPesquisa" ng-change="pesquisa()" placeholder="Digite o que quer pesquisar" class="form-control" />
+         <div search-dismiss="search-dismiss" class="fa fa-times form-control-feedback"></div>
+      </div>
+      <button type="submit" class="hidden btn btn-default">Submit</button>
+   </form>
+   <!-- END Search form-->
+</nav>
+<!-- END Top Navbar-->

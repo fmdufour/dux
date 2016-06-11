@@ -1,0 +1,42 @@
+@{
+    // This is requried for AngularJS because we have to send only the view markup (not within the layout)
+    Layout = null;
+    ViewBag.Title = "Index";
+}
+
+
+<html ng-app="adm">
+<head>
+    <title></title>
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="~/lib/angular-ui-router/release/angular-ui-router.min.js"></script>    
+    <script src="~/js/adm/adm.js"></script>
+    <script src="~/partials/adm/home/homecontroller.js"></script>
+    <script src="~/partials/adm/usuarios/usuarioscontroller.js"></script>
+    
+
+    <script src="~/directives/navTopo/navTopoDirective.js"></script>
+    <script src="~/directives/navtopo/navtopocontroller.js"></script>
+    <link href="~/directives/navtopo/navtopo.css" rel="stylesheet" />
+
+
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+    
+</head>
+<body ng-controller="admController">
+
+
+
+    <nav-topo title="Admin Dux" subtitle="Painel"></nav-topo>
+    <button class="btn btn-default" ui-sref="home">Home</button>
+    <button class="btn btn-default" ui-sref="usuarios">Usuarios</button>    
+
+
+    <div ui-view></div>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+﻿@{    
+    Layout = null;
+}
+<div class="content-heading">
+    <p> Criar Evento</p>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">            
+            <div class="panel-body">
+                <form name="formEvento" novalidate>
+                    <div class="row margin-bot-10">
+                        <div class="col-sm-6 margin-bot-10">
+                            <div class="bg-danger-light validationErrors" ng-show="vm.validationErrors">
+                                <ul>
+                                    <li ng-repeat="error in vm.validationErrors">{{error}}</li>
+                                </ul>
+                            </div>
+
+                            <label>Nome do Evento:</label>
+                            <div class="form-group">
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-info"></i></span>
+                                    <input name="nomeEvento"
+                                           type="text"
+                                           class="form-control"
+                                           ng-model="vm.evento.nomeEvento"
+                                           ng-required="true" />
+                                </div>
+                                <p ng-show="formEvento.nomeEvento.$error.required && formEvento.nomeEvento.$dirty" class="aviso-erro">
+                                    Digite o nome do Evento
+                                </p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Data de Início</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="text"
+                                           name="dtaInicio"
+                                           ng-click="vm.openCalendario()"
+                                           class="form-control"
+                                           uib-datepicker-popup="dd/MM/yyyy"
+                                           is-open="vm.calendario.opened"
+                                           current-text="Hoje" clear-text="Reset" close-text="Sair"
+                                           ng-model="vm.evento.dtaInicio"
+                                           ng-required="true" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="vm.openCalendario()">
+                                            <i class="fa fa-calendar-plus-o"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p ng-show="formEvento.dtaInicio.$error.required && dtaInicio.nomeEvento.$dirty" class="aviso-erro">
+                                    Selecione a data do evento
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>Hora de Início</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    <input type="text"
+                                           name="horaEvento"
+                                           class="form-control"
+                                           ng-model="vm.evento.horaEvento"
+                                           ui-mask="99:99"
+                                           ng-pattern="/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/" />
+                                </div>
+
+                                <p ng-show="formEvento.horaEvento.$error.pattern" class="aviso-erro">
+                                    Digite a hora no formato hh:mm. Exemplo: (16:45)
+                                </p>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <label>Selecione a cor do evento para exibição na agenda</label>
+                                </div>
+                                <div class="row cores-evento">
+                                    <div ng-repeat="cor in vm.cores" class="col-xs-2">
+                                        <div class="cor-evento {{cor}}"
+                                             ng-click="vm.selecCor(cor)">
+                                        </div>
+                                        <i ng-show="vm.corSelec == cor" class="evento-selec fa fa-arrow-up"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="text-center">
+                                <label>Perfis de Cadastro</label>
+                            </div>
+
+
+                            <div uib-dropdown>
+                                <label>Perfil de Lista</label>
+
+                                <div class="input-group">
+                                    <input name="perfilDist" class="form-control" placeholder="Nenhum Perfil Selecionado"
+                                           ng-model="vm.perfilListaSelec" style="margin-bottom:0" readonly />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" uib-dropdown-toggle>
+                                            <span class="caret">
+                                            </span>
+                                        </button>
+                                    </span>
+                                </div>
+
+
+                                <ul uib-dropdown-menu class="dropdown-pesquisa">
+                                    <li ng-click="vm.limpaPerfilLista()">  <a> <i class="fa fa-remove"></i> Limpar Escolha </a></li>
+                                    <li ng-repeat="a in vm.perfisLista">
+                                        <a ng-click="vm.selecionaPerfilLista(a)">
+                                            {{a.nomePerfil}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button ng-click="vm.salvaEvento(vm.evento)"
+                                class="btn btn-success">
+                            Salvar <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

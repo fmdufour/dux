@@ -1,0 +1,70 @@
+﻿@{    
+    Layout = null;
+}
+<div class="content-heading">
+    <p> Editar Perfil de Distribuição</p>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">            
+            <div class="panel-body">
+                <div>
+                    <form novalidate>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Nome do Perfil" ng-model="vm.perfil.nomePerfil"
+                                           ng-maxlength="50" ng-required="true" class="form-control" 
+                                     />
+                                </div>
+                             </div>   
+                            <div class="col-xs-12 col-md-6">
+                                <button class="btn btn-primary" ng-click="vm.editaPerfil(vm.perfil)">
+                                    Editar Perfil
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="60%">Nome Promoter</th>
+                            <th width="40%">Qtd. de Convidados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="layout in vm.perfil.layoutsDistribuicao">
+                            <td>{{ layout.nome  }}</td>
+                            <td>
+                                <div class="form-group row">
+                                    <div class="col-xs-12">
+                                        <div class="row" style="margin-bottom:5px">
+                                            <div class="col-sm-2 col-xs-4" style="text-align:center">
+                                                <em class="fa fa-2x fa-female"></em>
+                                            </div>
+                                            <div class="col-sm-10 col-xs-8">
+                                                <input class="form-control" style="display:inline-block" ng-model="layout.qtdNomesF" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-sm-2 col-xs-4" style="text-align:center">
+                                                <em class="fa fa-2x fa-male"></em>
+                                            </div>
+                                            <div class="col-sm-10 col-xs-8">
+                                                <input class="form-control" style="display:inline-block" ng-model="layout.qtdNomesM" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

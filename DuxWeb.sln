@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3DADC434-0741-47DB-B8E3-1179514CF99B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BEC84B85-453E-453D-BB7D-3C5922E07BF9}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dux.Web", "src\Dux.Web\Dux.Web.xproj", "{44500800-2E8D-463A-9EF4-09A2EB29E0F6}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dux.Infrastructure", "src\Dux.Infrastructure\Dux.Infrastructure.xproj", "{DEC93F47-532C-4E21-B195-156FDA954384}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dux.Domain", "src\Dux.Domain\Dux.Domain.xproj", "{B513A384-3599-42F3-B52E-D4594909E221}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dux.Application", "src\Dux.Application\Dux.Application.xproj", "{C063BCED-BA72-41A4-9203-B62050719368}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44500800-2E8D-463A-9EF4-09A2EB29E0F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44500800-2E8D-463A-9EF4-09A2EB29E0F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44500800-2E8D-463A-9EF4-09A2EB29E0F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44500800-2E8D-463A-9EF4-09A2EB29E0F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEC93F47-532C-4E21-B195-156FDA954384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEC93F47-532C-4E21-B195-156FDA954384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEC93F47-532C-4E21-B195-156FDA954384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEC93F47-532C-4E21-B195-156FDA954384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B513A384-3599-42F3-B52E-D4594909E221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B513A384-3599-42F3-B52E-D4594909E221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B513A384-3599-42F3-B52E-D4594909E221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B513A384-3599-42F3-B52E-D4594909E221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C063BCED-BA72-41A4-9203-B62050719368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C063BCED-BA72-41A4-9203-B62050719368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C063BCED-BA72-41A4-9203-B62050719368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C063BCED-BA72-41A4-9203-B62050719368}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{44500800-2E8D-463A-9EF4-09A2EB29E0F6} = {3DADC434-0741-47DB-B8E3-1179514CF99B}
+		{DEC93F47-532C-4E21-B195-156FDA954384} = {3DADC434-0741-47DB-B8E3-1179514CF99B}
+		{B513A384-3599-42F3-B52E-D4594909E221} = {3DADC434-0741-47DB-B8E3-1179514CF99B}
+		{C063BCED-BA72-41A4-9203-B62050719368} = {3DADC434-0741-47DB-B8E3-1179514CF99B}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://fernandoduf.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = src\\Dux.Application\\Dux.Application.xproj
+		SccProjectTopLevelParentUniqueName1 = DuxWeb.sln
+		SccProjectName1 = src/Dux.Application
+		SccLocalPath1 = src\\Dux.Application
+		SccProjectUniqueName2 = src\\Dux.Domain\\Dux.Domain.xproj
+		SccProjectTopLevelParentUniqueName2 = DuxWeb.sln
+		SccProjectName2 = src/Dux.Domain
+		SccLocalPath2 = src\\Dux.Domain
+		SccProjectUniqueName3 = src\\Dux.Infrastructure\\Dux.Infrastructure.xproj
+		SccProjectTopLevelParentUniqueName3 = DuxWeb.sln
+		SccProjectName3 = src/Dux.Infrastructure
+		SccLocalPath3 = src\\Dux.Infrastructure
+		SccProjectUniqueName4 = src\\Dux.Web\\Dux.Web.xproj
+		SccProjectTopLevelParentUniqueName4 = DuxWeb.sln
+		SccProjectName4 = src/Dux.Web
+		SccLocalPath4 = src\\Dux.Web
+	EndGlobalSection
+EndGlobal

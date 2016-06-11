@@ -1,0 +1,44 @@
+.title-bar{
+    background-color: white;
+    padding:0 20px;    
+    -webkit-box-shadow: 0 1px 9px 0 rgba(130,127,130,1);
+    -moz-box-shadow: 0 1px 9px 0 rgba(130,127,130,1);
+    box-shadow: 0 1px 9px 0 rgba(130,127,130,1);
+}
+
+.title-area{
+    display: inline-block;    
+}
+
+.logo-area{
+    text-align: center;
+}
+
+.logo-title{
+    color: #111;
+    margin-top: 6px;
+    font-size: 22px;
+}
+
+.logo-subtitle{
+    font-size: 13px;
+    margin-top: -6px;
+}
+
+.right-side-controls{
+    line-height: 40px;
+    margin-top:4px
+}
+
+.right-side-controls > div{
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .right-side-controls > div {
+        text-align: right;
+    }
+    .logo-area {
+        text-align: left;
+    }
+}
