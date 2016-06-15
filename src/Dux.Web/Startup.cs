@@ -15,10 +15,8 @@ using Dux.Web.ViewModels;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Diagnostics;
 using Newtonsoft.Json;
-using AspNet.Security.OAuth.Validation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System;
 
 namespace Dux.Web
@@ -187,6 +185,7 @@ namespace Dux.Web
                 appBuilder.Use(async (context, next) =>
                 {
                     var error = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
+
                     if (error != null && error.Error != null)
                     {
                         context.Response.StatusCode = 500;

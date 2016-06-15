@@ -7,6 +7,9 @@
       "imports": [ "dnxcore50", "portable-net45+win8" ]
     }
   },
+  "buildOptions": {
+    "debugType": "portable"
+  },
   "dependencies": {    
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0-rc2-final"
   }

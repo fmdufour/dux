@@ -7,6 +7,9 @@
       "imports": [ "dnxcore50", "portable-net45+win8" ]
     }
   },
+  "buildOptions": {
+    "debugType": "portable"
+  },
   "dependencies": {
     "Dux.Domain": "1.0.0",
     "Dux.Infrastructure": "1.0.0"

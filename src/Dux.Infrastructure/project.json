@@ -8,6 +8,9 @@
       "imports": [ "dnxcore50", "portable-net45+win8" ]
     }
   },
+  "buildOptions": {
+    "debugType": "portable"
+  },
   "dependencies": {
     "Dux.Domain": "1.0.0",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0-rc2-final",

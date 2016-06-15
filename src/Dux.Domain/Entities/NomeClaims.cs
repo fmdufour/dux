@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Dux.Domain
+﻿namespace Dux.Domain
 {
     public static class NomeClaims
     {
